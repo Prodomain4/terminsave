@@ -26,6 +26,7 @@
 
         <nav class="main-nav" aria-label="Main navigation">
           <button class="nav-item active" data-view="My files" type="button"><span class="nav-icon">[]</span>My files</button>
+          <button class="nav-item" data-view="Inbox" type="button"><span class="nav-icon">@</span>Inbox <span class="nav-badge" id="inbox-badge">3</span></button>
           <button class="nav-item" data-view="Starred" type="button"><span class="nav-icon">*</span>Starred</button>
           <button class="nav-item" data-view="Recent" type="button"><span class="nav-icon">~</span>Recent</button>
           <button class="nav-item" data-view="Trash" type="button"><span class="nav-icon">x</span>Trash</button>
@@ -59,6 +60,7 @@
         </header>
 
         <div class="content-wrap">
+          <div id="files-workspace">
           <section class="welcome-row">
             <div>
               <p class="eyebrow">MONDAY, SEPTEMBER 15</p>
@@ -67,6 +69,7 @@
             </div>
             <div class="quick-actions">
               <button class="outline-button" id="upload-button" type="button"><span>^</span> Upload</button>
+              <input id="file-picker" type="file" multiple hidden />
               <button class="dark-button" id="terminal-button" type="button"><span>&gt;_</span> Open terminal</button>
             </div>
           </section>
@@ -124,6 +127,28 @@
               </div>
             </article>
           </section>
+          </div>
+
+          <section class="inbox-workspace hidden" id="inbox-workspace">
+            <div class="inbox-heading">
+              <div>
+                <p class="eyebrow">YOUR MESSAGES</p>
+                <h1>Inbox<span class="wave">.</span></h1>
+                <p class="subtitle">A quiet place for the people and projects in your workspace.</p>
+              </div>
+              <button class="dark-button" id="compose-button" type="button"><span>+</span> Compose</button>
+            </div>
+            <div class="inbox-toolbar">
+              <strong id="inbox-count">3 unread</strong>
+              <button type="button" id="mark-read-button">Mark all read</button>
+            </div>
+            <div class="inbox-layout">
+              <div class="message-list" id="message-list"></div>
+              <article class="message-view" id="message-view">
+                <div class="message-placeholder"><span>@</span><strong>Select a message</strong><p>Open a conversation to read it here.</p></div>
+              </article>
+            </div>
+          </section>
         </div>
       </main>
     </div>
@@ -137,6 +162,10 @@
         </div>
       </div>
       <div class="terminal-output" id="terminal-output" role="log" aria-live="polite"></div>
+      <div class="youtube-player hidden" id="youtube-player">
+        <div class="youtube-player-header"><span><span class="youtube-mark">YT</span> YouTube preview</span><button type="button" id="close-youtube" aria-label="Close YouTube preview">x</button></div>
+        <iframe id="youtube-frame" title="YouTube video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
       <form class="terminal-form" id="terminal-form">
         <span class="prompt">prodomain4@terminsave:~$</span>
         <input id="terminal-input" autocomplete="off" spellcheck="false" aria-label="Terminal command" />
@@ -153,6 +182,21 @@
           <button type="button" data-new-type="folder"><span class="option-icon folder-option">~</span><span><strong>New folder</strong><small>Keep related files together</small></span><span>-&gt;</span></button>
           <button type="button" data-new-type="file"><span class="option-icon file-option">_</span><span><strong>New text file</strong><small>Start writing right away</small></span><span>-&gt;</span></button>
         </div>
+      </section>
+    </div>
+
+    <div class="modal-backdrop hidden" id="composer-backdrop">
+      <section class="modal composer-modal" role="dialog" aria-modal="true" aria-labelledby="composer-title">
+        <div class="modal-heading">
+          <div><p class="eyebrow">NEW MESSAGE</p><h2 id="composer-title">Compose</h2></div>
+          <button type="button" class="modal-close" id="composer-close" aria-label="Close composer">x</button>
+        </div>
+        <form id="composer-form" class="composer-form">
+          <label>To<input id="composer-to" type="email" placeholder="name@example.com" required /></label>
+          <label>Subject<input id="composer-subject" type="text" placeholder="What is this about?" required /></label>
+          <label>Message<textarea id="composer-body" rows="7" placeholder="Write your message..." required></textarea></label>
+          <div class="composer-actions"><button type="button" class="outline-button" id="composer-cancel">Cancel</button><button type="submit" class="dark-button"><span>-&gt;</span> Send message</button></div>
+        </form>
       </section>
     </div>
 

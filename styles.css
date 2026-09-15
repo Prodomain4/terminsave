@@ -39,6 +39,7 @@ button { cursor: pointer; }
 .nav-item:hover:not(.active), .footer-link:hover { background: #eef3ef; color: var(--ink); }
 .nav-icon { width: 17px; text-align: center; color: #8b9993; font: 16px "DM Mono", monospace; }
 .active .nav-icon { color: var(--green); }
+.nav-badge { min-width: 18px; margin-left: auto; padding: 3px 5px; border-radius: 10px; color: #fff; background: #d98667; text-align: center; font: 9px "DM Mono", monospace; }
 .sidebar-spacer { flex: 1; min-height: 40px; }
 .storage-card { padding: 16px; border: 1px solid #e4ebe5; border-radius: 10px; background: #fff; }
 .storage-heading { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; }
@@ -148,6 +149,43 @@ h1 { margin-bottom: 8px; font-size: clamp(27px, 3vw, 34px); line-height: 1.15; l
 code { padding: 2px 4px; border-radius: 3px; color: #39735a; background: #d7ebdc; font: 10px "DM Mono", monospace; }
 .text-button { padding: 0; border: 0; color: var(--green); background: transparent; font-size: 10px; font-weight: 800; }
 
+.inbox-workspace { padding-top: 2px; }
+.inbox-heading { display: flex; align-items: end; justify-content: space-between; }
+.inbox-heading h1 { margin-bottom: 8px; }
+.inbox-heading .dark-button span { margin-right: 7px; }
+.inbox-toolbar { display: flex; align-items: center; justify-content: space-between; margin-top: 40px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.inbox-toolbar strong { color: var(--ink); font-size: 12px; }
+.inbox-toolbar button, .message-action { border: 0; color: var(--green); background: transparent; font-size: 10px; font-weight: 700; }
+.inbox-layout { display: grid; grid-template-columns: minmax(340px, .9fr) 1.1fr; min-height: 420px; border: 1px solid var(--line); border-top: 0; background: #fff; }
+.message-list { border-right: 1px solid var(--line); }
+.message-row { position: relative; width: 100%; display: flex; align-items: start; gap: 11px; padding: 16px; border: 0; border-bottom: 1px solid #f0f2ef; color: var(--ink); background: #fff; text-align: left; }
+.message-row:hover, .message-row.selected { background: #f7faf7; }
+.message-row.unread:before { content: ""; position: absolute; top: 19px; left: 7px; width: 5px; height: 5px; border-radius: 50%; background: #d98667; }
+.message-avatar { width: 31px; height: 31px; display: grid; place-items: center; flex: 0 0 auto; border-radius: 50%; color: #fff; font-size: 9px; font-weight: 800; }
+.message-avatar.coral { background: #d98a72; }
+.message-avatar.green { background: #73a58b; }
+.message-avatar.blue { background: #7395af; }
+.message-avatar.purple { background: #9681aa; }
+.message-copy { min-width: 0; display: grid; gap: 3px; flex: 1; }
+.message-copy strong { font-size: 11px; }
+.message-copy b { overflow: hidden; font-size: 10px; text-overflow: ellipsis; white-space: nowrap; }
+.message-copy small { overflow: hidden; color: #9aa49e; font-size: 9px; text-overflow: ellipsis; white-space: nowrap; }
+.message-row time, .sender-line time { color: #aab3ad; white-space: nowrap; font: 9px "DM Mono", monospace; }
+.message-view { padding: 27px 30px; }
+.message-view-header { display: flex; align-items: start; justify-content: space-between; gap: 18px; }
+.message-view-header h2 { margin: 0; font-size: 19px; letter-spacing: -.6px; }
+.sender-line { display: flex; align-items: center; gap: 10px; margin-top: 25px; padding-bottom: 19px; border-bottom: 1px solid #f0f2ef; }
+.sender-line div { display: grid; gap: 3px; flex: 1; }
+.sender-line strong { font-size: 11px; }
+.sender-line small { color: #9aa49e; font-size: 9px; }
+.message-body { padding: 26px 0; color: #52625a; font-size: 12px; line-height: 1.8; }
+.reply-button { padding: 9px 13px; border: 1px solid #d7e1da; border-radius: 7px; color: var(--green); background: #fff; font-size: 10px; font-weight: 700; }
+.reply-button span { margin-left: 5px; }
+.message-placeholder, .inbox-empty { min-height: 360px; display: grid; place-content: center; justify-items: center; color: #a1aaa5; text-align: center; }
+.message-placeholder span, .inbox-empty span { margin-bottom: 13px; color: #8ab09a; font: 25px "DM Mono", monospace; }
+.message-placeholder strong, .inbox-empty strong { color: var(--ink); font-size: 12px; }
+.message-placeholder p, .inbox-empty p { margin: 6px 0 0; font-size: 10px; }
+
 .terminal-panel { position: fixed; z-index: 10; right: 30px; bottom: 24px; width: min(650px, calc(100vw - 300px)); height: 355px; display: flex; flex-direction: column; border: 1px solid #314e43; border-radius: 12px; color: #dae9df; background: #172c26; box-shadow: 0 22px 60px rgba(14, 31, 26, .25); transform: translateY(calc(100% + 40px)); opacity: 0; pointer-events: none; transition: transform .25s ease, opacity .25s ease; }
 .terminal-panel.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
 .terminal-header { height: 47px; display: flex; align-items: center; justify-content: space-between; padding: 0 15px; border-bottom: 1px solid #2d4a3f; }
@@ -164,6 +202,12 @@ code { padding: 2px 4px; border-radius: 3px; color: #39735a; background: #d7ebdc
 .terminal-line.error { color: #e3a28e; }
 .terminal-form { display: flex; align-items: center; gap: 8px; padding: 12px 16px 15px; color: #93c6a5; font: 11px "DM Mono", monospace; }
 .terminal-form input { min-width: 0; flex: 1; padding: 0; border: 0; outline: 0; color: #fff; background: transparent; font: inherit; }
+.youtube-player { flex: 0 0 auto; padding: 0 14px 12px; background: #172c26; }
+.youtube-player-header { display: flex; align-items: center; justify-content: space-between; padding: 0 0 8px; color: #9fc4ad; font: 10px "DM Mono", monospace; }
+.youtube-player-header button { padding: 0; border: 0; color: #769889; background: transparent; font: 10px "DM Mono", monospace; }
+.youtube-player-header button:hover { color: #fff; }
+.youtube-mark { display: inline-grid; width: 20px; height: 14px; place-items: center; margin-right: 5px; border-radius: 3px; color: #fff; background: #d95757; font-size: 8px; font-weight: 500; }
+.youtube-player iframe { width: 100%; height: 145px; display: block; border: 0; border-radius: 6px; background: #0b1713; }
 
 .modal-backdrop { position: fixed; z-index: 20; inset: 0; display: grid; place-items: center; background: rgba(26, 42, 35, .25); backdrop-filter: blur(3px); }
 .modal { width: 360px; padding: 25px; border: 1px solid var(--line); border-radius: 13px; background: #fff; box-shadow: var(--shadow); }
@@ -181,6 +225,14 @@ code { padding: 2px 4px; border-radius: 3px; color: #39735a; background: #d7ebdc
 .folder-option { color: #58815e; background: #e3f0e5; }
 .file-option { color: #547d9f; background: #e0ecf8; }
 .new-item-options button > span:last-child { color: #9bad9f; font: 12px "DM Mono", monospace; }
+.composer-modal { width: min(520px, calc(100vw - 40px)); }
+.composer-form { display: grid; gap: 14px; margin-top: 24px; }
+.composer-form label { display: grid; gap: 6px; color: #77817d; font-size: 10px; font-weight: 700; }
+.composer-form input, .composer-form textarea { width: 100%; border: 1px solid var(--line); border-radius: 7px; outline: none; padding: 10px 11px; color: var(--ink); background: #fbfcfa; font-size: 11px; resize: vertical; }
+.composer-form input:focus, .composer-form textarea:focus { border-color: #9fbbb0; box-shadow: 0 0 0 3px rgba(120, 169, 150, .12); }
+.composer-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 3px; }
+.composer-actions .outline-button, .composer-actions .dark-button { height: 34px; }
+.composer-actions .dark-button span { margin-right: 6px; }
 .toast { position: fixed; z-index: 30; left: 50%; bottom: 25px; padding: 11px 16px; border-radius: 7px; color: #fff; background: var(--green-dark); box-shadow: var(--shadow); font-size: 11px; opacity: 0; pointer-events: none; transform: translate(-50%, 12px); transition: opacity .2s ease, transform .2s ease; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
@@ -188,4 +240,5 @@ code { padding: 2px 4px; border-radius: 3px; color: #39735a; background: #d7ebdc
   .sidebar { width: 220px; flex-basis: 220px; }
   .topbar, .content-wrap { padding-left: 34px; padding-right: 34px; }
   .file-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .inbox-layout { grid-template-columns: minmax(300px, .9fr) 1.1fr; }
 }
