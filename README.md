@@ -12,6 +12,14 @@ python3 -m http.server 8000
 
 Then visit <http://localhost:8000>.
 
+## Use it as a hosted app
+
+Merge the pull request and wait for the `Deploy Terminsave` GitHub Actions workflow to finish. GitHub Pages will publish the app at:
+
+`https://prodomain4.github.io/terminsave/`
+
+If Pages has not been enabled for the repository yet, open **Settings > Pages**, choose **GitHub Actions** as the source, and rerun the workflow.
+
 ## What works
 
 - File, folder, starred, recent, and trash views
