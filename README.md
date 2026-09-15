@@ -12,6 +12,18 @@ python3 -m http.server 8000
 
 Then visit <http://localhost:8000>.
 
+## Run it in GitHub Codespaces
+
+1. Open the repository on GitHub and select **Code > Codespaces > Create codespace on branch**.
+2. Choose `copilot/terminsave-mvp` while the pull request is open, or `main` after merging.
+3. Codespaces starts the static server automatically and opens the forwarded **Terminsave (8000)** port in your browser.
+
+If the port does not open automatically, open the **Ports** panel in Codespaces and click the globe icon beside port `8000`. To restart the server manually, run:
+
+```bash
+python3 -m http.server 8000 --bind 0.0.0.0
+```
+
 ## Use it as a hosted app
 
 Merge the pull request and wait for the `Deploy Terminsave` GitHub Actions workflow to finish. GitHub Pages will publish the app at:

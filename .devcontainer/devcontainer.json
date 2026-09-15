@@ -1,0 +1,12 @@
+{
+  "name": "Terminsave",
+  "image": "mcr.microsoft.com/vscode/devcontainers/javascript-node:20",
+  "forwardPorts": [8000],
+  "portsAttributes": {
+    "8000": {
+      "label": "Terminsave",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "postStartCommand": "python3 -m http.server 8000 --bind 0.0.0.0 >/tmp/terminsave-server.log 2>&1 &"
+}
