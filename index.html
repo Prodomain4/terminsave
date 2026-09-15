@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Terminsave - a calm file space with a terminal built in." />
+    <title>Terminsave - your files, one terminal away</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark"><span></span><span></span><span></span></div>
+          <span>terminsave</span>
+        </div>
+
+        <button class="new-button" id="new-button" type="button">
+          <span class="plus">+</span>
+          <span>New</span>
+          <span class="shortcut">N</span>
+        </button>
+
+        <nav class="main-nav" aria-label="Main navigation">
+          <button class="nav-item active" data-view="My files" type="button"><span class="nav-icon">[]</span>My files</button>
+          <button class="nav-item" data-view="Starred" type="button"><span class="nav-icon">*</span>Starred</button>
+          <button class="nav-item" data-view="Recent" type="button"><span class="nav-icon">~</span>Recent</button>
+          <button class="nav-item" data-view="Trash" type="button"><span class="nav-icon">x</span>Trash</button>
+        </nav>
+
+        <div class="sidebar-spacer"></div>
+        <div class="storage-card">
+          <div class="storage-heading"><span>Storage</span><strong>32%</strong></div>
+          <div class="storage-bar"><span></span></div>
+          <p>3.2 GB of 10 GB used</p>
+          <button id="upgrade-button" type="button">Manage storage <span>-&gt;</span></button>
+        </div>
+        <div class="sidebar-footer">
+          <button class="footer-link" type="button"><span class="nav-icon">?</span>Help center</button>
+          <button class="footer-link" type="button"><span class="avatar small">PD</span>Prodomain4 <span class="chevron">v</span></button>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div class="breadcrumbs"><span id="view-title">My files</span><span class="slash">/</span><span class="muted">Workspace</span></div>
+          <div class="topbar-actions">
+            <label class="search-box" aria-label="Search files">
+              <span>/</span>
+              <input id="search-input" type="search" placeholder="Search files..." />
+              <kbd>⌘ K</kbd>
+            </label>
+            <button class="icon-button" id="notifications-button" type="button" aria-label="Notifications"><span class="bell">!</span><i></i></button>
+            <div class="avatar">PD</div>
+          </div>
+        </header>
+
+        <div class="content-wrap">
+          <section class="welcome-row">
+            <div>
+              <p class="eyebrow">MONDAY, SEPTEMBER 15</p>
+              <h1>Good afternoon, Prodomain4<span class="wave">.</span></h1>
+              <p class="subtitle">Everything you need, right where you left it.</p>
+            </div>
+            <div class="quick-actions">
+              <button class="outline-button" id="upload-button" type="button"><span>^</span> Upload</button>
+              <button class="dark-button" id="terminal-button" type="button"><span>&gt;_</span> Open terminal</button>
+            </div>
+          </section>
+
+          <section class="stats-grid" aria-label="Workspace summary">
+            <article class="stat-card">
+              <div class="stat-label"><span class="folder-icon blue">_</span>Files</div>
+              <strong id="file-count">24</strong>
+              <span class="stat-note positive">+3 this week</span>
+            </article>
+            <article class="stat-card">
+              <div class="stat-label"><span class="folder-icon purple">~</span>Folders</div>
+              <strong id="folder-count">8</strong>
+              <span class="stat-note">Across your workspace</span>
+            </article>
+            <article class="stat-card">
+              <div class="stat-label"><span class="folder-icon orange">~</span>Storage used</div>
+              <strong>3.2 GB</strong>
+              <span class="stat-note">of 10 GB</span>
+            </article>
+          </section>
+
+          <section class="files-section">
+            <div class="section-heading">
+              <div>
+                <h2 id="section-title">Your files</h2>
+                <span class="section-count" id="section-count">8 items</span>
+              </div>
+              <div class="view-actions">
+                <button class="sort-button" id="sort-button" type="button">Last modified <span>v</span></button>
+                <button class="view-toggle active" data-layout="grid" type="button" aria-label="Grid view">::</button>
+                <button class="view-toggle" data-layout="list" type="button" aria-label="List view">=</button>
+              </div>
+            </div>
+            <div class="file-grid" id="file-grid"></div>
+            <div class="empty-state hidden" id="empty-state">
+              <div class="empty-icon">/</div>
+              <h3>No files found</h3>
+              <p>Try a different search or create something new.</p>
+            </div>
+          </section>
+
+          <section class="bottom-grid">
+            <article class="activity-card">
+              <div class="card-heading"><h2>Recent activity</h2><button type="button" id="activity-button">View all <span>-&gt;</span></button></div>
+              <div class="activity-list" id="activity-list"></div>
+            </article>
+            <article class="tip-card">
+              <div class="tip-orb">!</div>
+              <div>
+                <p class="eyebrow">A LITTLE TIP</p>
+                <h3>Use the terminal to move faster.</h3>
+                <p>Type <code>help</code> to see everything you can do.</p>
+                <button class="text-button" id="tip-terminal-button" type="button">Try it now <span>-&gt;</span></button>
+              </div>
+            </article>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <section class="terminal-panel" id="terminal-panel" aria-label="Terminal" aria-hidden="true">
+      <div class="terminal-header">
+        <div class="terminal-title"><span class="terminal-dot"></span><strong>Workspace terminal</strong><span class="terminal-path">~/workspace</span></div>
+        <div class="terminal-controls">
+          <button type="button" id="clear-terminal">Clear</button>
+          <button type="button" id="close-terminal" aria-label="Close terminal">x</button>
+        </div>
+      </div>
+      <div class="terminal-output" id="terminal-output" role="log" aria-live="polite"></div>
+      <form class="terminal-form" id="terminal-form">
+        <span class="prompt">prodomain4@terminsave:~$</span>
+        <input id="terminal-input" autocomplete="off" spellcheck="false" aria-label="Terminal command" />
+      </form>
+    </section>
+
+    <div class="modal-backdrop hidden" id="modal-backdrop">
+      <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-heading">
+          <div><p class="eyebrow">CREATE SOMETHING</p><h2 id="modal-title">New item</h2></div>
+          <button type="button" class="modal-close" id="modal-close" aria-label="Close">x</button>
+        </div>
+        <div class="new-item-options">
+          <button type="button" data-new-type="folder"><span class="option-icon folder-option">~</span><span><strong>New folder</strong><small>Keep related files together</small></span><span>-&gt;</span></button>
+          <button type="button" data-new-type="file"><span class="option-icon file-option">_</span><span><strong>New text file</strong><small>Start writing right away</small></span><span>-&gt;</span></button>
+        </div>
+      </section>
+    </div>
+
+    <div class="toast" id="toast" role="status"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
